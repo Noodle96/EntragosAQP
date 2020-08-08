@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"></head>
+<body>
+	
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Spring Boot</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" th:href="@{/listarProductos}">Productos</a></li>			</ul>
+		</div>
+	</nav>
+
+	
+	<div class="container">
+		<h1 class="text-secondary border border-success border-top-0 border-right-0 border-left-0" th:text="${titulo}"></h1>
+		<p><a class="btn btn-success btn-xs" th:href="@{/formProductos}">Crear Productos</a></p>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Marca</th>
+					<th>Creacion</th>
+					<th>Valoracion</th>
+					<th>Descuento</th>
+					<th>Stock</th>
+					<th>Descripcion</th>
+					<th>Precio</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="producto: ${productos}">
+					<td th:text="${producto.id}"></td>
+					<td th:text="${producto.nombre}"></td>
+					<td th:text="${producto.marca}"></td>
+					<td th:text="${producto.createAt}"></td>
+					<td th:text="${producto.valoracion}"></td>
+					<td th:text="${producto.descuento}"></td>
+					<td th:text="${producto.stock}"></td>
+					<td th:text="${producto.descripcion}"></td>
+					<td th:text="${producto.precio}"></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{/formProductos/} + ${producto.id} "/>Editar</td>
+					<td><a class="btn btn-danger btn-xs" th:href="@{/eliminarProductos/} + ${producto.id} " onclick="return confirm('estas seguro que quieres eliminar');" />Eliminar</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>
